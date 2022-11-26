@@ -1,0 +1,8 @@
+applications:
+  - id: 3632
+  - id: 2894
+  - id: 3629
+  - id: 3630
+
+user: username@account
+password: yourpassword

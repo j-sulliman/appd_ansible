@@ -1,0 +1,6 @@
+{
+    "actionType": "EMAIL",
+    "emails": [
+        "test@email.com"
+    ]
+}
