@@ -10,7 +10,7 @@ This provides a starting template for further configuration and testing.
 
 Having installed ansible, run the playbook as below:
 
-``bash
+``
 ansible-playbook Playbook_AppD_Health_Rules.yml
 ``
 
