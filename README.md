@@ -7,3 +7,10 @@ Update "all.yml" under the group_vars directory with your credentials and applic
 Health rules, actions and policy configuration is defined in health_rule.json email_actions.json and hr_action_policy.json respectively.
 
 This provides a starting template for further configuration and testing.
+
+Having installed ansible, run the playbook as below:
+
+``shell
+ansible-playbook Playbook_AppD_Health_Rules.yml
+``
+
