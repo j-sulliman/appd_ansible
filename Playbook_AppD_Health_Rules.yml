@@ -1,0 +1,72 @@
+---
+- name: AppD API
+  hosts: localhost
+  tasks:
+    - name: Get Applications
+      uri:
+        url: https://apjsales2.saas.appdynamics.com/controller/rest/applications?output=json
+        user: "{{ user }}"
+        password: "{{ password }}"
+        method: GET
+        force_basic_auth: yes
+        headers:
+          Content-Type: application/json
+        return_content: true
+      register: _result
+
+    - debug:
+        var: _result
+
+    - name: Post Health Rules
+      uri:
+        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/health-rules
+        user: "{{ user }}"
+        password: "{{ password }}"
+        method: POST
+        force_basic_auth: yes
+        headers:
+          Content-Type: application/json
+        src: health_rule.json
+        status_code: 201
+      register: _result
+      with_items:
+        "{{ applications }}"
+
+    - debug:
+        var: _result
+
+    - name: Post Email Actions
+      uri:
+        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/actions
+        user: "{{ user }}"
+        password: "{{ password }}"
+        method: POST
+        force_basic_auth: yes
+        headers:
+          Content-Type: application/json
+        src: email_actions.json
+        status_code: 201
+      register: _result
+      with_items:
+        "{{ applications }}"
+
+    - debug:
+        var: _result
+
+    - name: Post Policy Health Rule and Actions
+      uri:
+        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/policies
+        user: "{{ user }}"
+        password: "{{ password }}"
+        method: POST
+        force_basic_auth: yes
+        headers:
+          Content-Type: application/json
+        src: hr_action_policy.json
+        status_code: 201
+      register: _result
+      with_items:
+        "{{ applications }}"
+
+    - debug:
+        var: _result
