@@ -26,7 +26,7 @@
         force_basic_auth: yes
         headers:
           Content-Type: application/json
-        src: health_rule.json
+        body: "{{ HealthRule|to_json }}"
         status_code: 201
       register: _result
       with_items:
@@ -44,8 +44,8 @@
         force_basic_auth: yes
         headers:
           Content-Type: application/json
-        src: email_actions.json
         status_code: 201
+        body: "{{ email|to_json }}"
       register: _result
       with_items:
         "{{ applications }}"
@@ -62,7 +62,7 @@
         force_basic_auth: yes
         headers:
           Content-Type: application/json
-        src: hr_action_policy.json
+        body: "{{ policy|to_json }}"
         status_code: 201
       register: _result
       with_items:

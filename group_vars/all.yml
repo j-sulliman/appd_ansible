@@ -4,6 +4,79 @@ applications:
   - id: 3629
   - id: 3630
 
-account: youraccount
-user: user@youraccount
-password: yourpassword
+account: apjsales2  
+user: jasulli2@apjsales2
+password: AppDynamics!
+
+email: 
+    actionType: "EMAIL"
+    emails:  
+      - test@email.com 
+
+
+HealthRule:
+  name: My new health rule
+  enabled: true
+  useDataFromLastNMinutes: 30
+  waitTimeAfterViolation: 5
+  affects:
+    affectedEntityType: BUSINESS_TRANSACTION_PERFORMANCE
+    affectedBusinessTransactions:
+      businessTransactionScope: ALL_BUSINESS_TRANSACTIONS
+  evalCriterias:
+    criticalCriteria:
+      conditionAggregationType: ALL
+      conditions:
+      - name: Condition 1
+        shortName: A
+        evaluateToTrueOnNoData: false
+        evalDetail:
+          evalDetailType: SINGLE_METRIC
+          metricAggregateFunction: VALUE
+          metricPath: Errors per Minute
+          metricEvalDetail:
+            metricEvalDetailType: BASELINE_TYPE
+            baselineCondition: GREATER_THAN_BASELINE
+            baselineName: All Data - Last 15 Days
+            baselineUnit: PERCENTAGE
+            compareValue: 30.5
+        triggerEnabled: true
+        minimumTriggers: 15
+    warningCriteria:
+      conditionAggregationType: ALL
+      conditions:
+      - name: Condition 1
+        shortName: A
+        evalDetail:
+          evalDetailType: METRIC_EXPRESSION
+          metricExpression: "({metric1} + ({metric2} * 3))"
+          metricExpressionVariables:
+          - variableName: metric1
+            metricAggregateFunction: VALUE
+            metricPath: 95th Percentile Response Time (ms)
+          - variableName: metric2
+            metricAggregateFunction: MAXIMUM
+            metricPath: Average CPU Used (ms)
+          metricEvalDetail:
+            metricEvalDetailType: SPECIFIC_TYPE
+            compareCondition: GREATER_THAN_SPECIFIC_VALUE
+            compareValue: 10
+
+policy:
+  name: HR Events Any HR All Databases
+  enabled: true
+  executeActionsInBatch: true
+  actions:
+  - actionName: test@email.com
+    actionType: EMAIL
+  events:
+    healthRuleEvents:
+      healthRuleEventTypes:
+      - HEALTH_RULE_CLOSE_CRITICAL
+      - HEALTH_RULE_CLOSE_WARNING
+      healthRuleScope:
+        healthRuleScopeType: ALL_HEALTH_RULES
+    otherEvents: []
+    customEvents: []
+  selectedEntities:
+    selectedEntityType: ANY_ENTITY
