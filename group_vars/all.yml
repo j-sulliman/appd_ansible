@@ -4,9 +4,9 @@ applications:
   - id: 3629
   - id: 3630
 
-account: apjsales2  
-user: jasulli2@apjsales2
-password: AppDynamics!
+account: youraccount  
+user: user@youraccount
+password: password
 
 email: 
     actionType: "EMAIL"
