@@ -4,7 +4,7 @@
   tasks:
     - name: Get Applications
       uri:
-        url: https://apjsales2.saas.appdynamics.com/controller/rest/applications?output=json
+        url: https://{{ account }}.saas.appdynamics.com/controller/rest/applications?output=json
         user: "{{ user }}"
         password: "{{ password }}"
         method: GET
@@ -19,7 +19,7 @@
 
     - name: Post Health Rules
       uri:
-        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/health-rules
+        url: https://{{ account }}.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/health-rules
         user: "{{ user }}"
         password: "{{ password }}"
         method: POST
@@ -37,7 +37,7 @@
 
     - name: Post Email Actions
       uri:
-        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/actions
+        url: https://{{ account }}.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/actions
         user: "{{ user }}"
         password: "{{ password }}"
         method: POST
@@ -55,7 +55,7 @@
 
     - name: Post Policy Health Rule and Actions
       uri:
-        url: https://apjsales2.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/policies
+        url: https://{{ account }}.saas.appdynamics.com/controller/alerting/rest/v1/applications/{{ item.id }}/policies
         user: "{{ user }}"
         password: "{{ password }}"
         method: POST
